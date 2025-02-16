@@ -10,7 +10,9 @@ import java.util.List;
 @Entity
 public class User {
     @Id
-    private String username;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    private String email;
     private String name;
     private String password;
     private String role;
@@ -22,16 +24,24 @@ public class User {
         return orders;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public void setOrders(List<GroceryOrder> orders) {
         this.orders = orders;
     }
 
     public String getUsername() {
-        return username;
+        return email;
     }
 
     public void setUsername(String username) {
-        this.username = username;
+        this.email = username;
     }
 
     public String getName() {
