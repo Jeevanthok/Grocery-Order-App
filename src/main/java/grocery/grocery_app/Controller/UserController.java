@@ -15,8 +15,8 @@ public class UserController {
     @Autowired
     private OrderService orderService;
 
-    @PostMapping
-    public GroceryOrder createOrder(@RequestBody Map<Long,Integer> orderdetails) {
-        return orderService.createOrder(orderdetails);
+    @PostMapping("/userid/{user_id}")
+    public GroceryOrder createOrder(@RequestBody Map<Long,Integer> orderdetails,@PathVariable int user_id) {
+        return orderService.createOrder(orderdetails,user_id);
     }
 }

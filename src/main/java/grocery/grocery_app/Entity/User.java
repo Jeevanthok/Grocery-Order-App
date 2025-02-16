@@ -1,10 +1,10 @@
 package grocery.grocery_app.Entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 @Entity
@@ -14,6 +14,17 @@ public class User {
     private String name;
     private String password;
     private String role;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference  // This prevents infinite recursion from the user's orders
+    private List<GroceryOrder> orders;
+
+    public List<GroceryOrder> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<GroceryOrder> orders) {
+        this.orders = orders;
+    }
 
     public String getUsername() {
         return username;
